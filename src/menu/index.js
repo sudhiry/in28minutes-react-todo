@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import UserContext from '../UserContext';
 
 export default class Menu extends Component {
+
+    static contextType = UserContext;
+
     render() {
         return (
             <header>
@@ -13,19 +17,19 @@ export default class Menu extends Component {
 
                     <ul className="navbar-nav">
                         <li>
-                            <Link to="/welcome/in28minutes" className="nav-link">Home</Link>
+                            {this.context.isAuthenticated && <Link to="/welcome/in28minutes" className="nav-link">Home</Link>}
                         </li>
                         <li>
-                            <Link to="/todos" className="nav-link">Todos</Link>
+                            {this.context.isAuthenticated && <Link to="/todos" className="nav-link">Todos</Link>}
                         </li>
                     </ul>
 
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         <li>
-                            <Link to="/login" className="nav-link">Login</Link>
+                            {!this.context.isAuthenticated && <Link to="/login" className="nav-link">Login</Link>}
                         </li>
                         <li>
-                            <Link to="/logout" className="nav-link">Logout</Link>
+                            {this.context.isAuthenticated && <Link to="/logout" className="nav-link" onClick={this.context.logout}>Logout</Link>}
                         </li>
                     </ul>
                 </nav>

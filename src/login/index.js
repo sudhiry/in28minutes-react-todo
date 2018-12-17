@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import UserContext from '../UserContext';
 
 export default class Login extends Component {
+
+    static contextType = UserContext;
 
     constructor(props) {
         super(props);
@@ -40,6 +43,7 @@ export default class Login extends Component {
             this.setState({
                 invalidLogin: false
             });
+            this.context.login({isAuthenticated: true, username: this.state.username});
             this.props.history.push(`/welcome/${this.state.username}`)
 
         } else {
