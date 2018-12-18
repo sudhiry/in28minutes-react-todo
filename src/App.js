@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import './App.css';
 import UserContext from './UserContext';
 import Menu from './menu';
@@ -8,6 +8,7 @@ import Login from './login';
 import Welcome from './welcome';
 import Todos from './todos';
 import Logout from './logout';
+import Error from './error';
 
 class App extends Component {
 
@@ -58,11 +59,14 @@ class App extends Component {
         <UserContext.Provider value={{ ...this.state, login: this.login, logout: this.logout }}>
           <Menu />
           <div className="container">
-            <Route exact path="/" component={Login} />
-            <Route path="/login" component={Login} />
-            <AuthRoute path="/welcome/:username" component={Welcome} />
-            <AuthRoute path="/todos" component={Todos} />
-            <AuthRoute path="/logout" component={Logout} />
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route path="/login" component={Login} />
+              <AuthRoute path="/welcome/:username" component={Welcome} />
+              <AuthRoute path="/todos" component={Todos} />
+              <AuthRoute path="/logout" component={Logout} />
+              <Route component={Error} />
+            </Switch>
           </div>
           <Footer />
         </UserContext.Provider>
