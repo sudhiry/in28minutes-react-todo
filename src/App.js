@@ -9,6 +9,7 @@ import Welcome from './welcome';
 import Todos from './todos';
 import Logout from './logout';
 import Error from './error';
+import Todo from './todo';
 
 class App extends Component {
 
@@ -65,6 +66,7 @@ class App extends Component {
               <AuthRoute path="/welcome/:username" component={Welcome} />
               <AuthRoute path="/todos" component={Todos} />
               <AuthRoute path="/logout" component={Logout} />
+              <AuthRoute path="/todo/:id" component={Todo} />
               <Route component={Error} />
             </Switch>
           </div>
